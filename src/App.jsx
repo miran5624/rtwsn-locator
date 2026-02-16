@@ -7,24 +7,20 @@ import axios from 'axios';
 export default function App() {
   const [anchors, setAnchors] = useState([]);
 
-  function addAnchor(idNumber) {
-    const fakePositions = {
-      1: { x: 50, y: 50 },
-      2: { x: 300, y: 50 },
-      3: { x: 175, y: 250 }
-    };
+  function addAnchor(anchorData) {
 
-    const positionForThisAnchor = fakePositions[idNumber];
+
+
 
     const newAnchor = {
-      id: idNumber,
-      x: positionForThisAnchor.x,
-      y: positionForThisAnchor.y,
+      id: anchorData.id,
+      x: anchorData.x,
+      y: anchorData.y,
     };
 
     setAnchors(function (previousAnchors) {
       const anchorsWithoutThisId = previousAnchors.filter(function (anchor) {
-        return anchor.id !== idNumber;
+        return anchor.id !== anchorData.id;
       });
 
       return [...anchorsWithoutThisId, newAnchor];
@@ -42,13 +38,11 @@ export default function App() {
       return;
     }
 
-
     axios.post('http://localhost:5000/calculate', { anchors })
       .then((response) => {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          // For now, let's just alert the answer the backend gave us
           alert(`The Backend says you are at X: ${response.data.x.toFixed(2)}, Y: ${response.data.y.toFixed(2)}`);
         }
       })
