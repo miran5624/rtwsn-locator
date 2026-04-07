@@ -5,32 +5,8 @@ import { useAppStore } from '@/shared';
 
 const Tab = createBottomTabNavigator();
 
-const SOSScreen = React.lazy(() => import('../broadcaster/BroadcasterScreen'));
-const RescueScreen = React.lazy(() => import('../dashboard/RescueDashboard'));
-
-function FallbackScreen() {
-  return (
-    <View style={styles.fallbackContainer}>
-      <Text style={styles.fallbackText}>Loading...</Text>
-    </View>
-  );
-}
-
-function LazySOS() {
-  return (
-    <Suspense fallback={<FallbackScreen />}>
-      <SOSScreen />
-    </Suspense>
-  );
-}
-
-function LazyRescue() {
-  return (
-    <Suspense fallback={<FallbackScreen />}>
-      <RescueScreen />
-    </Suspense>
-  );
-}
+import SOSScreen from '../broadcaster/BroadcasterScreen';
+import RescueScreen from '../dashboard/RescueDashboard';
 
 function HomeScreen() {
   const { role, isServiceRunning, detectedDevices } = useAppStore();
@@ -97,8 +73,8 @@ export default function RootNavigator() {
       }}
     >
       <Tab.Screen name="HOME" component={HomeScreen} />
-      <Tab.Screen name="SOS" component={LazySOS} />
-      <Tab.Screen name="RESCUE" component={LazyRescue} />
+      <Tab.Screen name="SOS" component={SOSScreen} />
+      <Tab.Screen name="RESCUE" component={RescueScreen} />
     </Tab.Navigator>
   );
 }

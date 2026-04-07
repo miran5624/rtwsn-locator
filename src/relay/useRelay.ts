@@ -48,7 +48,7 @@ function stopRelayingFn() {
   managerRef = null;
   activeTimers.forEach(clearTimeout);
   activeTimers.clear();
-  void NativeModules.BLEAdvertiser?.stopAdvertising();
+  NativeModules.BLEAdvertiser?.stopAdvertising()?.catch(() => {});
   isRelayingState = false;
   notify();
 }

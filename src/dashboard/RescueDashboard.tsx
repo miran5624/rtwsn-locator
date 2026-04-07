@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Animated, FlatList, ListRende
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useListener } from './useListener';
 import RadarScreen from './RadarScreen';
-import { useAppStore } from '../shared/store';
+
 import { DetectedDevice, getRSSIState, RSSI_COLORS } from '../shared/types';
 
 export default function RescueDashboard() {
@@ -12,7 +12,7 @@ export default function RescueDashboard() {
   const { isScanning, startListening, stopListening, sortedDevices } = useListener();
 
   useEffect(() => {
-    AsyncStorage.getItem('pa_volunteer_onboarded').then(v => {
+    AsyncStorage.getItem('pa_volunteer_onboarded').then((v: string | null) => {
       if (!v) setShowOnboarding(true);
     });
   }, []);

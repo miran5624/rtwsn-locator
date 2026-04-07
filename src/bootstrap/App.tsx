@@ -19,13 +19,9 @@ export default function App() {
   const [splashDone, setSplashDone] = useState(false);
   const [showModal, setShowModal] = useState(true);
 
-  const { hasAll, requestAll } = usePermissions
-    ? usePermissions()
-    : { hasAll: true, requestAll: () => {} };
+  const { hasAll, requestAll } = usePermissions();
 
-  const { startService } = useForegroundService
-    ? useForegroundService()
-    : { startService: () => {} };
+  const { startService } = useForegroundService();
 
   useEffect(() => {
     const subscription = AppState.addEventListener('change', (nextState: AppStateStatus) => {

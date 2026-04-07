@@ -67,17 +67,17 @@ const BroadcasterScreen = () => {
         );
       }, 30000);
 
-      try { NativeModules.PowerManager?.acquire?.(); } catch(_) {}
+      try { NativeModules.PowerManager?.acquire?.(); } catch {}
     } else {
       if (safetyTimerRef.current) clearTimeout(safetyTimerRef.current);
-      try { NativeModules.PowerManager?.release?.(); } catch(_) {}
+      try { NativeModules.PowerManager?.release?.(); } catch {}
     }
 
     return () => {
       if (safetyTimerRef.current) clearTimeout(safetyTimerRef.current);
       // Ensure we release the wake lock on unmount if it was active
       if (isAdvertising) {
-        try { NativeModules.PowerManager?.release?.(); } catch(_) {}
+        try { NativeModules.PowerManager?.release?.(); } catch {}
       }
     };
   }, [isAdvertising, stopSOS]);

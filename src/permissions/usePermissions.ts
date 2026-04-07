@@ -69,10 +69,11 @@ export const usePermissions = () => {
             let anyBlocked = false;
 
             for (const key of Object.keys(result)) {
-                if (result[key] === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
+                const pKey = key as keyof typeof result;
+                if (result[pKey] === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
                     anyBlocked = true;
                     allGranted = false;
-                } else if (result[key] !== PermissionsAndroid.RESULTS.GRANTED) {
+                } else if (result[pKey] !== PermissionsAndroid.RESULTS.GRANTED) {
                     allGranted = false;
                 }
             }

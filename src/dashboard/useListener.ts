@@ -4,13 +4,13 @@ import { Buffer } from 'buffer';
 
 import { SOS_SERVICE_UUID } from '../shared/bleConstants';
 import { useAppStore } from '../shared/store';
-import { DetectedDevice, SOSPacket, getRSSIState, RSSI_COLORS } from '../shared/types';
+import { DetectedDevice, SOSPacket } from '../shared/types';
 
 export const useListener = () => {
   const [isScanning, setIsScanning] = useState<boolean>(false);
   const managerRef = useRef<BleManager | null>(null);
 
-  const { detectedDevices, upsertDevice, clearDevices, setRole } = useAppStore();
+  const { detectedDevices, upsertDevice, setRole } = useAppStore();
 
   const startListening = () => {
     setRole('listener');
